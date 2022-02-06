@@ -1,5 +1,5 @@
 let weather={
-    key:'',
+    key:'ec93ce5a8faaa5efd0b906465088275d',
 
     fetchWeather:function(city){
         fetch(
