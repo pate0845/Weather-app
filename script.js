@@ -9,7 +9,11 @@ let weather={
              +this.key
             )
             .then((resp)=>resp.json())
-            .then((data)=>this.displayWeather(data));
+            .then((data)=>this.displayWeather(data))
+            .catch(e=>{
+                document.querySelector('.card').classList.add('error');
+                document.querySelector('.error').innerHTML='Error with the request code: '+e.message;
+            });
     },
 
     displayWeather:function(data){
