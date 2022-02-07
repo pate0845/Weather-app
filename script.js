@@ -8,7 +8,13 @@ let weather={
              "&units=metric&appid="
              +this.key
             )
-            .then((resp)=>resp.json())
+            .then(response => {
+                if (!response.ok) {
+                  throw new Error(`HTTP error! status: ${response.status}`);
+                } else {
+                  return response.json();
+                }
+              })
             .then((data)=>this.displayWeather(data))
             .catch(e=>{
                 document.querySelector('.card').classList.add('error');
@@ -28,6 +34,7 @@ let weather={
         document.querySelector('.temp').innerText=Math.round(temp)+"℃";
         document.querySelector('.wind').innerText='Wind speed: '+speed+'Km/h';
         document.querySelector('.weather').classList.remove('loading');
+        document.querySelector('.search-bar').value='';
         document.body.style.backgroundImage="url('https://source.unsplash.com/1600x900?"+name+"')";
     },
     search:function(){
@@ -35,6 +42,7 @@ let weather={
         this.fetchWeather(input);
     }
 }
+
 
 
 document.querySelector('.searchButton')
